@@ -25,6 +25,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         // Do any additional setup after loading the view, typically from a nib.
         tableView.delegate = self;
         tableView.dataSource = self;
+        print (CURRENT_WEATHER_URL);
     }
 
     override func didReceiveMemoryWarning() {
