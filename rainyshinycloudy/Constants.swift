@@ -11,10 +11,12 @@ import Foundation
 //lat=35&lon=139&appid=f8854d6ba5a42f0145f656f4b9fd3015
 
 let BASE_URL = "http://api.openweathermap.org/data/2.5/weather?";
-let LATITUDE = "lat=";
-let LONGITUDE = "&lon=";
+let LATITUDE = "lat=-20";
+let LONGITUDE = "&lon=40";
 let APP_ID = "&appid=";
 let API_KEY = "f8854d6ba5a42f0145f656f4b9fd3015";
+
+typealias DownloadComplete = () -> ();
 
 let CURRENT_WEATHER_URL = "\(BASE_URL)\(LATITUDE)\(LONGITUDE)\(APP_ID)\(API_KEY)"
 

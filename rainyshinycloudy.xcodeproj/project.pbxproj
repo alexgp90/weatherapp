@@ -15,6 +15,7 @@
 		0C8EC0171FAF162900D8B6E3 /* rainyshinycloudyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8EC0161FAF162900D8B6E3 /* rainyshinycloudyTests.swift */; };
 		0C8EC0221FAF162A00D8B6E3 /* rainyshinycloudyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8EC0211FAF162A00D8B6E3 /* rainyshinycloudyUITests.swift */; };
 		17576BB41FCC133E00B151CA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17576BB31FCC133E00B151CA /* Constants.swift */; };
+		17576BB61FCC1DE300B151CA /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17576BB51FCC1DE300B151CA /* CurrentWeather.swift */; };
 		7240A706E4EF27B1193EA7A3 /* Pods_rainyshinycloudyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E36E06525CFDD52FF9480E39 /* Pods_rainyshinycloudyTests.framework */; };
 		E837B6E62601B118D2B2B31B /* Pods_rainyshinycloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD81CF65654656D78674909 /* Pods_rainyshinycloudy.framework */; };
 		FF4AA4502470ED627C207F2A /* Pods_rainyshinycloudyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95AA8D8BB197A70206971FAC /* Pods_rainyshinycloudyUITests.framework */; };
@@ -52,6 +53,7 @@
 		0C8EC0211FAF162A00D8B6E3 /* rainyshinycloudyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rainyshinycloudyUITests.swift; sourceTree = "<group>"; };
 		0C8EC0231FAF162A00D8B6E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17576BB31FCC133E00B151CA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		17576BB51FCC1DE300B151CA /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		1B7CA63EC46DD8FFE00E89F5 /* Pods-rainyshinycloudyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rainyshinycloudyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rainyshinycloudyTests/Pods-rainyshinycloudyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		34B34438E0DCAEC4DBB37991 /* Pods-rainyshinycloudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rainyshinycloudy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rainyshinycloudy/Pods-rainyshinycloudy.debug.xcconfig"; sourceTree = "<group>"; };
 		6FD81CF65654656D78674909 /* Pods_rainyshinycloudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rainyshinycloudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,7 @@
 				0C8EC00A1FAF162900D8B6E3 /* LaunchScreen.storyboard */,
 				0C8EC00D1FAF162900D8B6E3 /* Info.plist */,
 				17576BB31FCC133E00B151CA /* Constants.swift */,
+				17576BB51FCC1DE300B151CA /* CurrentWeather.swift */,
 			);
 			path = rainyshinycloudy;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 			files = (
 				0C8EC0041FAF162900D8B6E3 /* WeatherVC.swift in Sources */,
 				0C8EC0021FAF162900D8B6E3 /* AppDelegate.swift in Sources */,
+				17576BB61FCC1DE300B151CA /* CurrentWeather.swift in Sources */,
 				17576BB41FCC133E00B151CA /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,6 +623,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = rainyshinycloudy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AppsFromAlex.rainyshinycloudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -633,6 +638,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = rainyshinycloudy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AppsFromAlex.rainyshinycloudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";

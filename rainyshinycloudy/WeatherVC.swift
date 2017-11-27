@@ -20,12 +20,18 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     //http://api.openweathermap.org/data/2.5/weather?id=683506&appid=f8854d6ba5a42f0145f656f4b9fd3015
     
+    var currentWeather = CurrentWeather();
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         tableView.delegate = self;
         tableView.dataSource = self;
-        print (CURRENT_WEATHER_URL);
+        currentWeather.downloadWeatherDetails {
+            //comment
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
