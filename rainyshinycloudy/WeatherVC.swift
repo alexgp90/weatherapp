@@ -29,8 +29,12 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         tableView.delegate = self;
         tableView.dataSource = self;
         currentWeather.downloadWeatherDetails {
-            //comment
+//adding the function to update the UI
+            self.updateMainIU();
+            
+            
         }
+        print(CURRENT_WEATHER_URL);
         
     }
 
@@ -53,7 +57,16 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         return cell;
     }
     
-    
+    func updateMainIU()
+    {
+        DateLabel.text = currentWeather.date;
+       
+        currentTempLabel.text = "\(NSString(format: "%.1f", currentWeather.currentTemp).doubleValue)";
+        currentWeatherType.text = currentWeather.weatherType;
+        locationLabel.text = currentWeather.cityName;
+        currentWeatherImage.image = UIImage(named: currentWeather.weatherType);
+        
+    }
     
 
 }

@@ -25,26 +25,24 @@ class CurrentWeather {
     }
 
     var date: String {
-        if (_date == nil)
-        {
-            _date = "";
+        if _date == nil {
+            _date = ""
         }
-        return _date;
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        let currentDate = dateFormatter.string(from: Date())
+        self._date = "Today, \(currentDate)"
+        return _date
     }
-
+    
     var weatherType: String {
-        if (_weatherType == nil)
-        {
-            _weatherType = "";
+        if _weatherType == nil {
+            _weatherType = ""
         }
-        let dateFormatter = DateFormatter();
-        dateFormatter.dateStyle = .long;
-        dateFormatter.timeStyle = .none;
-        let currentDate = dateFormatter.string(from: Date());
-        self._date = "Today \(currentDate)";
-        return _weatherType;
+        return _weatherType
     }
-
     var currentTemp: Double {
         if (_currentTemp == nil)
         {
@@ -54,7 +52,7 @@ class CurrentWeather {
     }
     
     
-    func downloadWeatherDetails(completed: DownloadComplete){
+    func downloadWeatherDetails(completed:  @escaping DownloadComplete ){
             //Alalmofire download
         let currentWeatherURL = URL(string: CURRENT_WEATHER_URL);
         
@@ -62,10 +60,43 @@ class CurrentWeather {
             {
                 response in
                 let result = response.result;
-                print (response);
+               // print (response); //just for debbuging purposes
                 
+                if let dict = result.value as? Dictionary<String, AnyObject>
+                {
+                    if let name = dict["name"] as? String
+                    {
+                        self._cityName = name.capitalized;
+                         print(self._cityName) //fix this
+                        
+                    }
+                    
+                    if let weather = dict["weather"] as? [Dictionary<String, AnyObject>]
+                    {
+                        if let main = weather[0]["main"] as? String
+                        {
+                            self._weatherType = main.capitalized
+                             print(self._weatherType)
+                        }
+                    
+                    }
+                    
+                    if let main = dict["main"] as? Dictionary<String,AnyObject>
+                    {
+                        if let currentT = main["temp"] as? Double{
+                            
+                            let KtoC = currentT-273.15;
+                            self._currentTemp = KtoC;
+                             print(self._currentTemp)
+                        
+                        }
+                    }
+
+                
+                }
+                              completed();
         }
-        completed();
+        
         
         
         

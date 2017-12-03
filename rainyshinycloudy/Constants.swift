@@ -11,8 +11,8 @@ import Foundation
 //lat=35&lon=139&appid=f8854d6ba5a42f0145f656f4b9fd3015
 
 let BASE_URL = "http://api.openweathermap.org/data/2.5/weather?";
-let LATITUDE = "lat=-20";
-let LONGITUDE = "&lon=40";
+let LATITUDE = "lat=44.4323";
+let LONGITUDE = "&lon=26.1063";
 let APP_ID = "&appid=";
 let API_KEY = "f8854d6ba5a42f0145f656f4b9fd3015";
 
