@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -21,7 +22,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     //http://api.openweathermap.org/data/2.5/weather?id=683506&appid=f8854d6ba5a42f0145f656f4b9fd3015
     
     var currentWeather = CurrentWeather();
-    
+    var forecast = Forecast();
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,10 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
             
             
         }
-        print(CURRENT_WEATHER_URL);
+        downloadForecast{
+        
+        }
+        print(FORECAST_WEATHER_URL);
         
     }
 
@@ -67,7 +71,18 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         currentWeatherImage.image = UIImage(named: currentWeather.weatherType);
         
     }
-    
+      func downloadForecast(completed:  @escaping DownloadComplete )
+      {
+        let forecastURL = URL(string: FORECAST_WEATHER_URL);
+        Alamofire.request(forecastURL!).responseJSON
+            {
+                response in
+                let result = response.result;
+                print (response); //just for debbuging purposes
+                
+                completed();
+        }
+    }
 
 }
 
