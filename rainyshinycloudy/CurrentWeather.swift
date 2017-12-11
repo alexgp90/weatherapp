@@ -67,7 +67,7 @@ class CurrentWeather {
                     if let name = dict["name"] as? String
                     {
                         self._cityName = name.capitalized;
-                         print(self._cityName) //fix this
+                        // print(self._cityName) //fix this
                         
                     }
                     
@@ -76,7 +76,7 @@ class CurrentWeather {
                         if let main = weather[0]["main"] as? String
                         {
                             self._weatherType = main.capitalized
-                             print(self._weatherType)
+                            // print(self._weatherType)
                         }
                     
                     }
@@ -87,7 +87,7 @@ class CurrentWeather {
                             
                             let KtoC = currentT-273.15;
                             self._currentTemp = KtoC;
-                             print(self._currentTemp)
+                           //  print(self._currentTemp)
                         
                         }
                     }

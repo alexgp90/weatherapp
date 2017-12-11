@@ -44,5 +44,57 @@ class Forecast
         }
         return _highTemp;
     }
+    init (weatherDict: Dictionary <String, AnyObject>)
+    {
+        if let temp = weatherDict["temp"] as? Dictionary<String, AnyObject>
+        {
+            if let min = temp["temp_min"] as? Double
+            {
+                let KtoC = min-273.15;
+                self._lowTemp = "\(KtoC)";
+                print(self.lowTemp)
+            }
+            
+            if let max = temp["temp_max"] as? Double
+            {
+                let KtoC = max-273.15;
+                self._highTemp = "\(KtoC)";
+                print(self.highTemp)
+            }
+        }
+        if let weather = weatherDict["weather"] as? [Dictionary<String, AnyObject>]
+        {
+            if let main = weather[0]["main"] as? String
+            {
+                self._weatherType = main;
+            }
+            
+        }
+        if let date = weatherDict["dt"] as? Double
+        {
+            let unixConvertedDate = Date(timeIntervalSince1970: date);
+            let dateFormatter = DateFormatter();
+            dateFormatter.dateStyle = .full ;
+            dateFormatter.dateFormat = "EEEE";
+            dateFormatter.timeStyle = .none ;
+            self._date = unixConvertedDate.dayOfTheWeek();
+           print(self.date)
+            
+            
+        }
+    }
 
 }
+
+extension Date
+{
+    func dayOfTheWeek()-> String
+    {
+        let dateFormatter = DateFormatter();
+        dateFormatter.dateFormat = "EEEE";
+        return dateFormatter.string(from: self);
+    }
+
+
+}
+

@@ -22,23 +22,22 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     //http://api.openweathermap.org/data/2.5/weather?id=683506&appid=f8854d6ba5a42f0145f656f4b9fd3015
     
     var currentWeather = CurrentWeather();
-    var forecast = Forecast();
+    var forecast = Forecast!.self
+    var forecasts = [Forecast]();
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         tableView.delegate = self;
         tableView.dataSource = self;
-        currentWeather.downloadWeatherDetails {
-//adding the function to update the UI
-            self.updateMainIU();
-            
-            
-        }
-        downloadForecast{
+        currentWeather.downloadWeatherDetails
+            {
+                self.downloadForecast{
+                    self.updateMainIU();
+                }
+            }
         
-        }
-        print(FORECAST_WEATHER_URL);
+       // print(FORECAST_WEATHER_URL);
         
     }
 
@@ -53,12 +52,22 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6;
+        return forecasts.count;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath)
-        return cell;
+        if  let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as? WeatherCell
+        {
+            let forecast = forecasts[indexPath.row]
+            cell.configureCell(forecast: forecast);
+            
+            return cell;
+        }
+        
+        else
+        {
+            return WeatherCell();
+        }
     }
     
     func updateMainIU()
@@ -78,7 +87,21 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
             {
                 response in
                 let result = response.result;
-                print (response); //just for debbuging purposes
+                //print (response); //just for debbuging purposes
+                
+                if let dict = result.value as? Dictionary <String, AnyObject>{
+                    if let list = dict ["list"] as? [Dictionary<String, AnyObject>]
+                    {
+                        for obj in list
+                        {
+                            let forecast = Forecast(weatherDict: obj)
+                            self.forecasts.append(forecast)
+                            print(obj);
+                        }
+                        self.tableView.reloadData();
+                    }
+                }
+                
                 
                 completed();
         }
