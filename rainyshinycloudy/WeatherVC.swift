@@ -8,8 +8,10 @@
 
 import UIKit
 import Alamofire
+import CoreLocation
 
-class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
+
+class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate{
 
     
     @IBOutlet weak var DateLabel: UILabel!
@@ -19,23 +21,35 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var currentWeatherType: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    let locationManager = CLLocationManager();
+    var currentLocation: CLLocation!
+    
+    
+    
     //http://api.openweathermap.org/data/2.5/weather?id=683506&appid=f8854d6ba5a42f0145f656f4b9fd3015
     
     var currentWeather = CurrentWeather();
     var forecast = Forecast!.self
     var forecasts = [Forecast]();
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.requestWhenInUseAuthorization();
+        locationManager.startMonitoringSignificantLocationChanges();
+        locationManager.requestLocation();
+        
+        //print(CURRENT_WEATHER_URL);
+
+        
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
         tableView.delegate = self;
         tableView.dataSource = self;
-        currentWeather.downloadWeatherDetails
-            {
-                self.downloadForecast{
-                    self.updateMainIU();
-                }
-            }
         
        // print(FORECAST_WEATHER_URL);
         
@@ -106,6 +120,33 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 completed();
         }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations[0]
+        
+        // Save the location data
+        Location.sharedInstance.latitude = userLocation.coordinate.latitude
+        Location.sharedInstance.longitude = userLocation.coordinate.longitude
+        currentWeather.downloadWeatherDetails
+            {
+                self.downloadForecast{
+                    self.updateMainIU();
+                }
+        }
 
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Hardwire longitude and lattiude coor to Vancouver in case location is denied
+        Location.sharedInstance.latitude = 49.25
+        Location.sharedInstance.longitude = -123.12
+        currentWeather.downloadWeatherDetails
+            {
+                self.downloadForecast{
+                    self.updateMainIU();
+                }
+        }
+ }
+    
 }
 
