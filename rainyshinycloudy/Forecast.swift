@@ -46,20 +46,35 @@ class Forecast
     }
     init (weatherDict: Dictionary <String, AnyObject>)
     {
-        if let temp = weatherDict["temp"] as? Dictionary<String, AnyObject>
+        if let date = weatherDict["dt"] as? Double
         {
-            if let min = temp["temp_min"] as? Double
+            let unixConvertedDate = Date(timeIntervalSince1970: date);
+            let dateFormatter = DateFormatter();
+           // dateFormatter.dateStyle = .medium ;
+            dateFormatter.dateFormat = "E, HH:mm";
+            //dateFormatter.timeStyle = .short ;
+            self._date = dateFormatter.string(from: unixConvertedDate);
+            print(self.date)
+            
+            
+        }
+        
+        if let main = weatherDict["main"] as? Dictionary<String, AnyObject>
+        {
+            if let min = main["temp_min"] as? Double
             {
                 let KtoC = min-273.15;
-                self._lowTemp = "\(KtoC)";
-                print(self.lowTemp)
+                self._lowTemp = "\(NSString(format: "%.1f",KtoC).doubleValue)";
+
+              //  print(self.lowTemp)
             }
             
-            if let max = temp["temp_max"] as? Double
+            if let max = main["temp_max"] as? Double
             {
                 let KtoC = max-273.15;
-                self._highTemp = "\(KtoC)";
-                print(self.highTemp)
+                self._highTemp = "\(NSString(format: "%.1f", KtoC).doubleValue)";
+
+              //  print(self.highTemp)
             }
         }
         if let weather = weatherDict["weather"] as? [Dictionary<String, AnyObject>]
@@ -70,18 +85,7 @@ class Forecast
             }
             
         }
-        if let date = weatherDict["dt"] as? Double
-        {
-            let unixConvertedDate = Date(timeIntervalSince1970: date);
-            let dateFormatter = DateFormatter();
-            dateFormatter.dateStyle = .full ;
-            dateFormatter.dateFormat = "EEEE";
-            dateFormatter.timeStyle = .none ;
-            self._date = unixConvertedDate.dayOfTheWeek();
-           print(self.date)
-            
-            
-        }
+       
     }
 
 }

@@ -155,7 +155,7 @@ Romania</string>
                                                         <constraint firstItem="THJ-5l-MHs" firstAttribute="centerY" secondItem="8r1-VM-sXO" secondAttribute="centerY" id="nTN-Ts-EZT"/>
                                                     </constraints>
                                                 </stackView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTf-t6-pZf">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTf-t6-pZf">
                                                     <rect key="frame" x="16" y="15" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="b6P-xQ-Wae"/>
